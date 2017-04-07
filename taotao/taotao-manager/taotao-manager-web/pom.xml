@@ -12,8 +12,6 @@
 	<artifactId>taotao-manager-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>taotao-manager-web Maven Webapp</name>
-	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
 			<groupId>com.taotao</groupId>
@@ -41,7 +39,4 @@
 			<artifactId>commons-fileupload</artifactId>
 		</dependency>
 	</dependencies>
-	<build>
-		<finalName>taotao-manager-web</finalName>
-	</build>
 </project>
