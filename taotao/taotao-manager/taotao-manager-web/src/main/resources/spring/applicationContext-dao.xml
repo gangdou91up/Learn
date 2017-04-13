@@ -10,35 +10,23 @@
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:resource/jdbc.properties" />
+		<property name="locations">
+		<list>
+			<value>classpath:resource/jdbc.properties</value>
+			<value>classpath:resource/resource.properties</value>
+		</list>
+		</property>
 	</bean>
 
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+	<!-- 数据库连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		destroy-method="close">
-		<property name="driverClass" value="${jdbc.driver}" />
-		<property name="autoCommitOnClose" value="false" />
-		<property name="jdbcUrl" value="${jdbc.url}" />
-		<property name="user" value="${jdbc.username}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
-		<property name="acquireIncrement" value="5" />
-		<!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
-		<property name="acquireRetryAttempts" value="30" />
-		<!--两次连接中间隔时间，单位毫秒。Default: 1000 -->
-		<property name="acquireRetryDelay" value="1000" />
-		<!-- 当连接池用完时客户端调用getConnection()后等待获取新连接的时间，超时后将抛出SQLException,如设为0则无限期等待。单位毫秒。Default:0 -->
-		<property name="checkoutTimeout" value="10000" />
-		<property name="maxStatements" value="0" />
-		<!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。 Default: 3 -->
-		<property name="initialPoolSize" value="10" />
-		<!-- 最小连接数 -->
-		<property name="minPoolSize" value="5" />
-		<!--连接池中保留的最大连接数。Default: 15 -->
-		<property name="maxPoolSize" value="100" />
-		<!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
-		<property name="maxIdleTime" value="60" />
-		<!--How long to hang on to excess unused connections after traffic spike -->
-		<property name="maxIdleTimeExcessConnections" value="600" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="maxActive" value="10" />
+		<property name="minIdle" value="5" />
 	</bean>
 
 	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->

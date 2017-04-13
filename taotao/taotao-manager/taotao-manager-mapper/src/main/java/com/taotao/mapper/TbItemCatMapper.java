@@ -15,7 +15,9 @@ public interface TbItemCatMapper {
     int insert(TbItemCat record);
 
     int insertSelective(TbItemCat record);
-
+    
+    List<TbItemCat> selectTbItemCatList(Long parentId);
+    
     List<TbItemCat> selectByExample(TbItemCatExample example);
 
     TbItemCat selectByPrimaryKey(Long id);
